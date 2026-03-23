@@ -104,8 +104,38 @@ h1 {
     border-color: #dda67d;
 }
 
-.botao {
+.subsecao {
     margin-top: 1rem;
+    margin-bottom: 0.6rem;
+    color: var(--cor-destaque-escura);
+}
+
+.itens-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.itens-grid-cabecalho {
+    margin-bottom: 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #83503f;
+}
+
+.campo-quantidade input {
+    text-align: center;
+}
+
+.acoes-form {
+    margin-top: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.botao {
     border: 0;
     border-radius: 10px;
     background: linear-gradient(120deg, var(--cor-destaque) 0%, #cb6a44 100%);
@@ -117,6 +147,15 @@ h1 {
 
 .botao:hover {
     filter: brightness(0.96);
+}
+
+.botao:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.botao-secundario {
+    background: linear-gradient(120deg, #7a5a44 0%, #9c775d 100%);
 }
 
 .erro {
@@ -154,6 +193,16 @@ h1 {
     border-radius: 10px;
     background-color: #fff7ec;
     border: 1px solid #f6dfc4;
+}
+
+.lista-produtos li span {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.lista-produtos li small {
+    font-size: 0.84rem;
+    opacity: 0.8;
 }
 
 .total {
@@ -209,5 +258,18 @@ h1 {
 
     .form-grid {
         grid-template-columns: 1fr;
+    }
+
+    .itens-grid {
+        grid-template-columns: 1fr;
+        margin-bottom: 0.55rem;
+    }
+
+    .acoes-form .botao {
+        width: 100%;
+    }
+
+    .itens-grid-cabecalho {
+        display: none;
     }
 }

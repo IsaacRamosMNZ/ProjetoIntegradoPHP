@@ -9,14 +9,14 @@ class Pedido
 {
     private int $numero;
     private Cliente $cliente;
-    /** @var Produto[] */
-    private array $produtos;
+    /** @var array<int, array{produto: Produto, quantidade: int}> */
+    private array $itens;
 
     public function __construct(int $numero, Cliente $cliente)
     {
         $this->setNumero($numero);
         $this->setCliente($cliente);
-        $this->produtos = [];
+        $this->itens = [];
     }
 
     public function getNumero(): int
@@ -39,23 +39,30 @@ class Pedido
         $this->cliente = $cliente;
     }
 
-    /** @return Produto[] */
-    public function getProdutos(): array
+    /** @return array<int, array{produto: Produto, quantidade: int}> */
+    public function getItens(): array
     {
-        return $this->produtos;
+        return $this->itens;
     }
 
-    public function adicionarProduto(Produto $produto): void
+    public function adicionarProduto(Produto $produto, int $quantidade = 1): void
     {
-        $this->produtos[] = $produto;
+        if ($quantidade < 1) {
+            throw new InvalidArgumentException('A quantidade deve ser maior que zero.');
+        }
+
+        $this->itens[] = [
+            'produto' => $produto,
+            'quantidade' => $quantidade,
+        ];
     }
 
     public function calcularTotal(): float
     {
         $total = 0.0;
 
-        foreach ($this->produtos as $produto) {
-            $total += $produto->getPreco();
+        foreach ($this->itens as $item) {
+            $total += $item['produto']->getPreco() * $item['quantidade'];
         }
 
         return $total;
@@ -65,10 +72,13 @@ class Pedido
     {
         $linhasProdutos = '';
 
-        foreach ($this->produtos as $produto) {
+        foreach ($this->itens as $item) {
+            $produto = $item['produto'];
+            $quantidade = $item['quantidade'];
             $nome = htmlspecialchars($produto->getNome(), ENT_QUOTES, 'UTF-8');
-            $preco = number_format($produto->getPreco(), 2, ',', '.');
-            $linhasProdutos .= "<li><span>{$nome}</span><strong>R$ {$preco}</strong></li>";
+            $precoUnitario = number_format($produto->getPreco(), 2, ',', '.');
+            $subtotal = number_format($produto->getPreco() * $quantidade, 2, ',', '.');
+            $linhasProdutos .= "<li><span>{$nome} x {$quantidade}<small>Unit.: R$ {$precoUnitario}</small></span><strong>R$ {$subtotal}</strong></li>";
         }
 
         if ($linhasProdutos === '') {
