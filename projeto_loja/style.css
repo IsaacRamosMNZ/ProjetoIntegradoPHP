@@ -71,6 +71,66 @@ h1 {
     margin-bottom: 1rem;
 }
 
+.form-card {
+    margin-bottom: 1.2rem;
+}
+
+.form-grid {
+    display: grid;
+    gap: 0.85rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.campo {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.campo span {
+    font-weight: 600;
+    color: var(--cor-destaque-escura);
+}
+
+.campo input {
+    border: 1px solid #e6ccb0;
+    border-radius: 10px;
+    padding: 0.75rem 0.8rem;
+    font-size: 0.98rem;
+    background-color: #fffdf9;
+}
+
+.campo input:focus {
+    outline: 2px solid #f1c59e;
+    border-color: #dda67d;
+}
+
+.botao {
+    margin-top: 1rem;
+    border: 0;
+    border-radius: 10px;
+    background: linear-gradient(120deg, var(--cor-destaque) 0%, #cb6a44 100%);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+}
+
+.botao:hover {
+    filter: brightness(0.96);
+}
+
+.erro {
+    margin-top: 0.85rem;
+    color: #8b1f13;
+    font-weight: 600;
+}
+
+.aviso {
+    margin-top: 0.8rem;
+    text-align: center;
+    font-weight: 600;
+}
+
 .bloco+.bloco {
     margin-top: 1.2rem;
 }
@@ -145,5 +205,9 @@ h1 {
     .lista-produtos li {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
     }
 }
